@@ -1,5 +1,5 @@
 {
-	"name": "Analyze data with a serverless SQL pool",
+	"name": "02 Analyze data with a serverless SQL pool",
 	"properties": {
 		"content": {
 			"query": "/*\nUse the master database to create a separate database for custom database objects. \nCustom database objects, cannot be created in the master database.\n*/\n\nCREATE DATABASE DataExplorationDB COLLATE Latin1_General_100_BIN2_UTF8;\n\n/*\nFrom the 'DataExplorationDB', create utility objects such as credentials and data sources.\nAn external data source can be created without a credential. \nIf a credential does not exist, the caller's identity will be used to access the external data source.\n*/\n\nCREATE EXTERNAL DATA SOURCE ContosoLake WITH ( LOCATION = 'https://synapsestgact.dfs.core.windows.net')\n\n/*\nOptionally, use the newly created 'DataExplorationDB' database to \ncreate a login for a user in DataExplorationDB that will access external data:\n*/\n\n\nCREATE LOGIN data_explorer WITH PASSWORD = 'My Very Strong Password 1234!';\nCREATE USER data_explorer FOR LOGIN data_explorer;\nGRANT ADMINISTER DATABASE BULK OPERATIONS TO data_explorer;\n\n\n\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n            BULK '/synapsedata/NYCTripSmall.parquet',\n            DATA_SOURCE = 'ContosoLake',\n            FORMAT='PARQUET'\n    ) AS [result]\n\n\n\n\n",
