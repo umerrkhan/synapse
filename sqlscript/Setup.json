@@ -2,12 +2,12 @@
 	"name": "Setup",
 	"properties": {
 		"content": {
-			"query": "CREATE DATABASE DataExplorationDB COLLATE Latin1_General_100_BIN2_UTF8;\n\n",
+			"query": "CREATE DATABASE DataExplorationDB COLLATE Latin1_General_100_BIN2_UTF8;\n\nCREATE EXTERNAL DATA SOURCE ContosoLake WITH ( LOCATION = 'https://synapsestgact.dfs.core.windows.net')\n\n\n",
 			"metadata": {
 				"language": "sql"
 			},
 			"currentConnection": {
-				"databaseName": "master",
+				"databaseName": "DataExplorationDB",
 				"poolName": "Built-in"
 			},
 			"resultLimit": 5000
