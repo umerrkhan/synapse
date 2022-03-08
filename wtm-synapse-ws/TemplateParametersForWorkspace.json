@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "wtm-synapse-ws"
+		},
+		"wtm-synapse-ws-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"wtm-synapse-ws-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://synapsestgact.dfs.core.windows.net"
+		}
+	}
+}
