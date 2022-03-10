@@ -1,5 +1,5 @@
 {
-	"name": "Notebook 1",
+	"name": "05 Analyze with Apache Spark",
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "676e421a-b945-4e96-953f-66e7282ab4d1"
+				"spark.autotune.trackingId": "ee4e2045-3b5b-489c-b577-d0e21548d57b"
 			}
 		},
 		"metadata": {
@@ -131,7 +131,8 @@
 					},
 					"microsoft": {
 						"language": "python"
-					}
+					},
+					"collapsed": false
 				},
 				"source": [
 					"%%pyspark\r\n",
@@ -139,6 +140,39 @@
 					"display(df)"
 				],
 				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"df = spark.sql(\"\"\"\r\n",
+					"   SELECT PassengerCount,\r\n",
+					"       SUM(TripDistanceMiles) as SumTripDistance,\r\n",
+					"       AVG(TripDistanceMiles) as AvgTripDistance\r\n",
+					"   FROM dbnyctaxi.trip\r\n",
+					"   WHERE TripDistanceMiles > 0 AND PassengerCount > 0\r\n",
+					"   GROUP BY PassengerCount\r\n",
+					"   ORDER BY PassengerCount\r\n",
+					"\"\"\") \r\n",
+					"display(df)\r\n",
+					"df.write.saveAsTable(\"dbnyctaxi.passengercountstats\")"
+				],
+				"execution_count": 7
 			}
 		]
 	}
