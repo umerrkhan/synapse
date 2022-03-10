@@ -1,6 +1,7 @@
 {
 	"name": "05 Analyze with Apache Spark",
 	"properties": {
+		"description": "https://docs.microsoft.com/en-us/azure/synapse-analytics/get-started-analyze-spark",
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
@@ -17,7 +18,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "ee4e2045-3b5b-489c-b577-d0e21548d57b"
+				"spark.autotune.trackingId": "d4c370ef-ae51-4fb3-9d89-5f6165dbe1f7"
 			}
 		},
 		"metadata": {
