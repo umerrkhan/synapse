@@ -2,7 +2,7 @@
 	"name": "External Table",
 	"properties": {
 		"folder": {
-			"name": "Dedicated SQL Pool"
+			"name": "OPENROWSET-Examples"
 		},
 		"content": {
 			"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [ExternalFileFormat_Parquet] \n\tWITH ( FORMAT_TYPE = PARQUET)\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'synapsedata_synapsestgact_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [DataSource_synapsestgact] \n\tWITH (\n\t\tLOCATION = 'abfss://synapsedata@synapsestgact.dfs.core.windows.net' \n\t)\nGO\n\nCREATE EXTERNAL TABLE NYCTrip (\n\t[DateID] int,\n\t[MedallionID] int,\n\t[HackneyLicenseID] int,\n\t[PickupTimeID] int,\n\t[DropoffTimeID] int,\n\t[PickupGeographyID] int,\n\t[DropoffGeographyID] int,\n\t[PickupLatitude] float,\n\t[PickupLongitude] float,\n\t[PickupLatLong] nvarchar(4000),\n\t[DropoffLatitude] float,\n\t[DropoffLongitude] float,\n\t[DropoffLatLong] nvarchar(4000),\n\t[PassengerCount] int,\n\t[TripDurationSeconds] int,\n\t[TripDistanceMiles] float,\n\t[PaymentType] nvarchar(4000),\n\t[FareAmount] numeric(19,4),\n\t[SurchargeAmount] numeric(19,4),\n\t[TaxAmount] numeric(19,4),\n\t[TipAmount] numeric(19,4),\n\t[TollsAmount] numeric(19,4),\n\t[TotalAmount] numeric(19,4)\n\t)\n\tWITH (\n\tLOCATION = 'NYCTripSmall.parquet',\n\tDATA_SOURCE = [DataSource_synapsestgact],\n\tFILE_FORMAT = [ExternalFileFormat_Parquet]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM dbo.NYCTrip\nGO",
