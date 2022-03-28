@@ -1,0 +1,20 @@
+{
+	"name": "COPY INTO TABLE",
+	"properties": {
+		"folder": {
+			"name": "Dedicated SQL Pool"
+		},
+		"content": {
+			"query": "Create Table dbo.Customers\n(\nCustomerID int,\nPersonID int,\nStoreID int,\nTerritoryID   varchar(50) ,\nAccountNumber   varchar(200),\nrowguid   varchar(200),\nModifiedDate   varchar(50)\n);\n\nCOPY INTO dbo.Customers \n(\nCustomerID,PersonID,StoreID,TerritoryID,AccountNumber,rowguid,ModifiedDate\n) \nFROM 'https://synapsestgact.dfs.core.windows.net/synapsedata/SampleFiles/Customers.csv'\nWITH\n(\n\tFILE_TYPE = 'CSV'\n\t,FIELDTERMINATOR = ','\n\t,FIRSTROW = 2\n\t,DATEFORMAT = 'mdy'\n\n)\n\n\n\nSELECT * FROM  dbo.Customers \n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SQLPOOL01",
+				"poolName": "SQLPOOL01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
