@@ -1,0 +1,20 @@
+{
+	"name": "Loading_CSV_File",
+	"properties": {
+		"folder": {
+			"name": "OPENROWSET-Examples"
+		},
+		"content": {
+			"query": "Select *\nFROM\nOPENROWSET(\n    BULK 'https://synapsestgact.dfs.core.windows.net/synapsedata/SampleFiles/Customers.csv',\n    FORMAT = 'CSV',\n    HEADER_ROW = TRUE,\n    PARSER_VERSION = '2.0'\n    ) AS RESULT",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
